@@ -1,0 +1,16 @@
+<?php
+$categories = $this->getStoreCategories(true, false, true);
+$categoryHelper = $this->getCategoryHelper();
+$columnItemsCount = (int) $block->getColumnItemsCount();
+?>
+<?php echo '<h3>' . __("Catalog") . '</h3>'; ?>
+<?php  $i = 0;
+    echo '<ul class="categories-list">';
+    foreach ($categories as $category):
+        if (!$category->getIsActive()) continue;
+        if($columnItemsCount != 0 && $i != 0 && $i % $columnItemsCount == 0) echo '</ul><ul class="categories-list">';
+        echo '<li><a href="' . $categoryHelper->getCategoryUrl($category) . '">' .  $category->getName() . '</a></li>';
+        $i++;
+    endforeach;
+    echo '</ul>';
+?>
